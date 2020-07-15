@@ -19,9 +19,9 @@ Stretch: What if you could only use instances of your Stack class to implement t
          What would that look like? How many Stacks would you need? Try it!
 """
 # class Queue:
-#     def __init__(self, init_list=[]):
+#     def __init__(self):
 #         self.size = 0
-#         self.storage = init_list
+#         self.storage = []
     
 #     def __len__(self):
 #         length = len(self.storage)
@@ -42,24 +42,26 @@ sys.path.append('C:\\Users\\spira\\Documents\\Data-Structures\\singly_linked_lis
 from singly_linked_list import LinkedList, Node
 
 class Queue:
-    def __init__(self, init_node=None):
+    def __init__(self):
         self.size = 0
-        self.storage = LinkedList(init_node)
+        #Set storage to empty array
+        self.storage = []
     
+    #Define array size
     def __len__(self):
-        length = 0
-        if self.storage.head:
-            length = 1
-            ongoing = self.storage.head
-            while ongoing.next:
-                length += 1
-                ongoing = ongoing.next
-        self.size = length
-        return length
+        return self.size
 
     def enqueue(self, value):
-        self.storage.add_to_tail(value)
+        #Add 1 to array size
+        self.size += 1
+        #Append new entry to array
+        self.storage.append(value)
 
     def dequeue(self):
-        value = self.storage.remove_head()
-        return value
+        #If the array is empty, return nothing
+        if self.size == 0:
+            return None
+        else:    
+            #The array is not empty, remove the entry from the top (FIFO)
+            self.size -= 1
+            return self.storage.pop(0)
